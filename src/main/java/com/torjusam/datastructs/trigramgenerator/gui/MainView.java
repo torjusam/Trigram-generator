@@ -11,8 +11,8 @@ import javafx.scene.layout.VBox;
 public class MainView extends VBox {
 
     // The structures for trigrams are stored and passed to child GUI elements that needs it (read/write)
-    private TrigramStorage triStore;
-    private TrigramController triController;
+    private final TrigramStorage triStore;
+    private final TrigramController triController;
 
     /**
      * Constructor initalizes TrigramStorage and its controller,
@@ -23,9 +23,9 @@ public class MainView extends VBox {
         triController = new TrigramController(triStore);
 
         // Initialize TxtFileInputSection and pass the TrigramController
-        TxtFileInputSection txtFileInputSection = new TxtFileInputSection(triController);
+        TxtFileSection txtFileSection = new TxtFileSection(triController);
 
         // Add TxtFileInputSection to the layout
-        this.getChildren().add(txtFileInputSection);
+        this.getChildren().add(txtFileSection);
     }
 }

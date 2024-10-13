@@ -24,7 +24,6 @@ class TextReader {
         if (!file.canRead()) throw new IOException("File cannot be read: " + filePath);
 
         List<String> words = new ArrayList<>();
-
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
 

@@ -1,7 +1,6 @@
 package com.torjusam.datastructs.trigramgenerator.gui;
 
 import com.torjusam.datastructs.trigramgenerator.HandleUncaughtExceptions;
-import com.torjusam.datastructs.trigramgenerator.services.TxtFileInputController;
 import com.torjusam.datastructs.trigramgenerator.services.TrigramController;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -16,25 +15,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * JavaFX class where user can select a .txt file, and it gets processed with the trigramController.
+ * JavaFX UI component for managing a list of text files.
+ * This class allows users to add and remove files and displays the selected files in the UI.
+ * Delegates logic to {@link TxtFileSectionController}.
  */
-class TxtFileInputSection extends VBox {
-
-    private final List<File> selectedFiles;
+class TxtFileSection extends VBox {
     private final VBox fileListContainer;
-    private final TxtFileInputController fileController;
+    private final TxtFileSectionController fileController;
     private static final File defaultFile = new File("src/main/resources/com/torjusam/datastructs/trigramgenerator/file.txt");
 
-    // Constructor
-    TxtFileInputSection(TrigramController trigramController) {
-        this.selectedFiles = new ArrayList<>();
+    TxtFileSection(TrigramController trigramController) {
+        List<File> selectedFiles = new ArrayList<>();
         this.fileListContainer = new VBox(10);
-        this.fileController = new TxtFileInputController(trigramController, selectedFiles);
+        this.fileController = new TxtFileSectionController(trigramController, selectedFiles);
 
         Label header = new Label("Text files");
         header.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
 
-        // btn for adding files
         Button addFileButton = new Button("Add File");
         addFileButton.setOnAction(e -> handleSelectFile());
 
@@ -44,6 +41,9 @@ class TxtFileInputSection extends VBox {
             handleAddFile(defaultFile);
     }
 
+    /**
+     * Adds a file to the file list and displays it in the UI.
+     */
     private void handleAddFile(File file) {
         try {
             fileController.addFile(file);
@@ -53,7 +53,6 @@ class TxtFileInputSection extends VBox {
         }
     }
 
-    // Display file in the list (UI only)
     private void displayFile(File file) {
         HBox fileRow = new HBox(10);
         TextField filePathField = new TextField(file.getName());
@@ -61,7 +60,7 @@ class TxtFileInputSection extends VBox {
 
         Button removeButton = new Button("Remove");
         removeButton.setOnAction(e -> {
-            fileController.removeFile(file); // Delegate to FileController
+            fileController.removeFile(file);
             fileListContainer.getChildren().remove(fileRow);
         });
 
@@ -69,7 +68,9 @@ class TxtFileInputSection extends VBox {
         fileListContainer.getChildren().add(fileRow);
     }
 
-    // Method to select a new file
+    /**
+     * Opens a file chooser to select a new file and adds it to the file list.
+     */
     private void handleSelectFile() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files", "*.txt"));
