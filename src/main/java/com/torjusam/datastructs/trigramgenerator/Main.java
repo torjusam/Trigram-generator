@@ -9,13 +9,13 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        // Initialize MainView
-        MainView mainView = new MainView();
+        // Global exception handler
+        HandleUncaughtExceptions.setupExceptionHandler();
 
-        // Set up the stage and scene
-        Scene scene = new Scene(mainView, 400, 300);
+        // JavaFx stage & Scene
+        MainView mainView = new MainView();
         primaryStage.setTitle("Trigram Text Generator");
-        primaryStage.setScene(scene);
+        primaryStage.setScene(new Scene(mainView, 600, 400));
         primaryStage.show();
     }
 
