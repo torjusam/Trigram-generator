@@ -3,6 +3,6 @@ module com.torjusam.datastructs.trigramgenerator.main {
     requires javafx.fxml;
 
 
-    opens com.torjusam.datastructs.trigramgenerator.main to javafx.fxml;
-    exports com.torjusam.datastructs.trigramgenerator.main;
+    exports com.torjusam.datastructs.trigramgenerator;
+    opens com.torjusam.datastructs.trigramgenerator to javafx.fxml;
 }

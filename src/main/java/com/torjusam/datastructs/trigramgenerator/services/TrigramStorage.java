@@ -2,6 +2,9 @@ package com.torjusam.datastructs.trigramgenerator.services;
 
 import java.util.*;
 
+/***
+ * Data structure for trigrams
+ */
 public class TrigramStorage {
 
     private Map<List<String>, Map<String, Integer>> trigramMap;
@@ -10,8 +13,8 @@ public class TrigramStorage {
         this.trigramMap = new HashMap<>();
     }
 
-    // use the list of words
-    public void addTrigrams(List<String> words) {
+    // Add-method that uses the list of words
+    void addTrigrams(List<String> words) {
         for (int i = 0; i < words.size() - 2; i++) {
             // Get the first two words (trigram key)
             List<String> key = Arrays.asList(words.get(i), words.get(i + 1));
@@ -27,9 +30,18 @@ public class TrigramStorage {
         }
     }
 
+    // Placeholder
+    void printTrigramMap() {
+        for (Map.Entry<List<String>, Map<String, Integer>> entry : trigramMap.entrySet()) {
+            List<String> key = entry.getKey();
+            Map<String, Integer> valueMap = entry.getValue();
+
+            System.out.println(key + " -> " + valueMap);
+        }
+    }
+
     public Map<List<String>, Map<String, Integer>> getTrigramMap() {
         return trigramMap;
     }
 
-    // other methods to interact with map??
 }

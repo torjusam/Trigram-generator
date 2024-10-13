@@ -7,10 +7,13 @@ import java.util.*;
  * Reads a text file line by line, splits each line into words while
  * treating punctuation as separate tokens, and returns a list of words
  * and punctuation marks.
+ *
+ * TODO: Validation, error handling etc.
+ *  Currently expects a specific layout and just goes through it with regex..
  */
-public class TextReader {
+class TextReader {
 
-    public List<String> readFromFile(String filePath) throws IOException {
+    List<String> readFromFile(String filePath) throws IOException {
         if (filePath == null || filePath.isEmpty())
             throw new IllegalArgumentException("File path cannot be null or empty.");
 
