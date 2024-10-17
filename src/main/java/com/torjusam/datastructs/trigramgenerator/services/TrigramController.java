@@ -23,9 +23,12 @@ public class TrigramController {
         trigramStorage.printTrigramMap();
     }
 
+
     // Placeholder for reading from url
     public void processUrl(String url) throws IOException {
-
+        List<String> words = textReader.readFromURL(url);
+        trigramStorage.addTrigrams(words);
+        trigramStorage.printTrigramMap();
     }
 
     public TrigramStorage getTrigramStorage() {

@@ -22,12 +22,11 @@ import java.util.List;
 class TxtFileSection extends VBox {
     private final VBox fileListContainer;
     private final TxtFileSectionController fileController;
-    private static final File defaultFile = new File("src/main/resources/com/torjusam/datastructs/trigramgenerator/file.txt");
 
-    TxtFileSection(TrigramController trigramController) {
+    TxtFileSection(TrigramController triController) {
         List<File> selectedFiles = new ArrayList<>();
         this.fileListContainer = new VBox(10);
-        this.fileController = new TxtFileSectionController(trigramController, selectedFiles);
+        this.fileController = new TxtFileSectionController(triController, selectedFiles);
 
         Label header = new Label("Text files");
         header.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
@@ -36,9 +35,6 @@ class TxtFileSection extends VBox {
         addFileButton.setOnAction(e -> handleSelectFile());
 
         this.getChildren().addAll(header, addFileButton, fileListContainer);
-
-        if (defaultFile.exists())
-            handleAddFile(defaultFile);
     }
 
     /**

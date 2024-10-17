@@ -2,6 +2,8 @@ package com.torjusam.datastructs.trigramgenerator.gui;
 
 import com.torjusam.datastructs.trigramgenerator.services.TrigramController;
 import com.torjusam.datastructs.trigramgenerator.services.TrigramStorage;
+import javafx.geometry.Insets;
+import javafx.scene.control.Separator;
 import javafx.scene.layout.VBox;
 
 /**
@@ -22,10 +24,18 @@ public class MainView extends VBox {
         triStore = new TrigramStorage();
         triController = new TrigramController(triStore);
 
-        // Initialize TxtFileInputSection and pass the TrigramController
+        // Input sections; pass them controller for handling the trigram-store
         TxtFileSection txtFileSection = new TxtFileSection(triController);
+        LinkSection linkSection = new LinkSection(triController);
 
-        // Add TxtFileInputSection to the layout
-        this.getChildren().add(txtFileSection);
+        // distance between em
+        Separator separator = new Separator();
+        setMargin(separator, new Insets(20, 0, 20, 0));
+
+        this.getChildren().addAll(
+                txtFileSection,
+                separator,
+                linkSection
+        );
     }
 }
