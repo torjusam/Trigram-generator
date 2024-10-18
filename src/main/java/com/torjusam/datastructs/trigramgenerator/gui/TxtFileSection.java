@@ -34,7 +34,11 @@ class TxtFileSection extends VBox {
         Button addFileButton = new Button("Add File");
         addFileButton.setOnAction(e -> handleSelectFile());
 
-        this.getChildren().addAll(header, addFileButton, fileListContainer);
+        this.getChildren().addAll(
+                header,
+                addFileButton,
+                fileListContainer
+        );
     }
 
     /**

@@ -58,7 +58,7 @@ class TextReader {
         // Regex
         String validWordRegex = "^[a-zA-ZæøåÆØÅ'-]+$";
         Pattern htmlPattern = Pattern.compile("<[^>]+>");
-        Pattern unwantedPattern = Pattern.compile("^(recursion|wikipedia|wikidata|wikimedia|sidefeltet|seconds|false|visited|include|vector|key|with|autoritetsdatalenker|limit|memory|cache|time|expansion|lua|report|rendering|bytes|function|saved|parser|Wikidata|node|transclusion|id|revision|template|argument|cached|real|highest|wikibase|newpp|entities|navigasjon|prosjekt|handlinger).*", Pattern.CASE_INSENSITIVE);
+        Pattern unwantedPattern = Pattern.compile("^(recursion|wikipedia|wikidata|wikimedia|QR-kodeWikidata-element|sidefeltet|seconds|false|visited|include|vector|key|with|autoritetsdatalenker|limit|memory|cache|time|expansion|lua|report|rendering|bytes|function|saved|parser|Wikidata|node|transclusion|id|revision|template|argument|cached|real|highest|wikibase|newpp|entities|navigasjon|prosjekt|handlinger).*", Pattern.CASE_INSENSITIVE);
 
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()))) {
             String line;

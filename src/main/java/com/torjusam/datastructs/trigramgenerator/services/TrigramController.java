@@ -1,6 +1,5 @@
 package com.torjusam.datastructs.trigramgenerator.services;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -21,6 +20,7 @@ public class TrigramController {
         List<String> words = textReader.readFromFile(filePath);
         trigramStorage.addTrigrams(words); // Store trigrams in the map
         trigramStorage.printTrigramMap();
+        System.out.println("Finished reading from: " + filePath);
     }
 
 
@@ -29,6 +29,7 @@ public class TrigramController {
         List<String> words = textReader.readFromURL(url);
         trigramStorage.addTrigrams(words);
         trigramStorage.printTrigramMap();
+        System.out.println("Finished reading from: " + url);
     }
 
     public TrigramStorage getTrigramStorage() {

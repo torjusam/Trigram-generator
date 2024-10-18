@@ -21,7 +21,8 @@ class LinkSection extends VBox {
     private final VBox linkListContainer;
     private final LinkSectionController linkController;
 
-    private static final String defaultUrl = "https://no.wikipedia.org/wiki/Ringenes_herre";
+    private static final String defaultUrlLOTR = "https://no.wikipedia.org/wiki/Ringenes_herre";
+    private static final String defaultUrlCovid = "https://no.wikipedia.org/wiki/Koronapandemien";
 
     LinkSection(TrigramController triController) {
         List<String> selectedLinks = new ArrayList<>();
@@ -31,9 +32,10 @@ class LinkSection extends VBox {
         Label header = new Label("Links");
         header.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
 
-        Button addLinkButton = new Button("Add Link");
+        Button addLinkButton = new Button("Legg til ny lenke");
         addLinkButton.setOnAction(e -> handleAddLink(""));
 
+        this.setSpacing(10);
         this.getChildren().addAll(
                 header,
                 addLinkButton,
@@ -41,7 +43,8 @@ class LinkSection extends VBox {
         );
 
         // Initialize with default URL pre-filled
-        handleAddLink(defaultUrl);
+        handleAddLink(defaultUrlLOTR);
+        handleAddLink(defaultUrlCovid);
     }
 
     /**
@@ -54,8 +57,8 @@ class LinkSection extends VBox {
         linkInputField.setPromptText("Enter a URL");
         linkInputField.setPrefWidth(300);
 
-        Button confirmBtn = new Button("Confirm");
-        Button cancelBtn = new Button("Cancel");
+        Button confirmBtn = new Button("Legg til");
+        Button cancelBtn = new Button("Avbryt");
 
         // On "add link": display row with input field, and a confirm/cancel btn
         HBox linkInputRow = new HBox(10);

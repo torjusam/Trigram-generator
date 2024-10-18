@@ -4,15 +4,17 @@ import com.torjusam.datastructs.trigramgenerator.services.TrigramController;
 import com.torjusam.datastructs.trigramgenerator.services.TrigramStorage;
 import javafx.geometry.Insets;
 import javafx.scene.control.Separator;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+
 
 /**
  * MainView is the layout of the app.
- * Responsible for setting up JavaFX classes and their respective controller classes
+ * Responsible for initalizing JavaFX classes and their respective controller classes,
+ * aswell as the main shared TrigramStorage and Controller.
  */
-public class MainView extends VBox {
+public class MainView extends BorderPane {
 
-    // The structures for trigrams are stored and passed to child GUI elements that needs it (read/write)
     private final TrigramStorage triStore;
     private final TrigramController triController;
 
@@ -24,18 +26,43 @@ public class MainView extends VBox {
         triStore = new TrigramStorage();
         triController = new TrigramController(triStore);
 
-        // Input sections; pass them controller for handling the trigram-store
+        VBox InputSection = createInputSection();
+        VBox OutputSection = createOutputSection();
+
+        setLeft(InputSection);
+        setCenter(OutputSection);
+    }
+
+    /**
+     * Helper method for the section on the left; for inputs
+     */
+    private VBox createInputSection() {
+        // Initialize Input sections and pass them controller for the trigram-store
         TxtFileSection txtFileSection = new TxtFileSection(triController);
         LinkSection linkSection = new LinkSection(triController);
 
-        // distance between em
-        Separator separator = new Separator();
-        setMargin(separator, new Insets(20, 0, 20, 0));
+        // container
+        VBox inputSec = new VBox(10);
+        inputSec.setPadding(new Insets(10));
+        inputSec.setStyle("-fx-border-color: gray; -fx-border-width: 1px;"); // CSS border
 
-        this.getChildren().addAll(
+        inputSec.getChildren().addAll(
                 txtFileSection,
-                separator,
+                new Separator(),
                 linkSection
         );
+        return inputSec;
+    }
+
+    /**
+     * Section on the right; for output components.
+     *
+     * TODO: Implement
+     */
+    private VBox createOutputSection() {
+        VBox middleSec = new VBox();
+        middleSec.setPadding(new Insets(10));
+
+        return middleSec;
     }
 }

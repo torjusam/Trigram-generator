@@ -15,7 +15,7 @@ public class Main extends Application {
         // JavaFx stage & Scene
         MainView mainView = new MainView();
         primaryStage.setTitle("Trigram Text Generator");
-        primaryStage.setScene(new Scene(mainView, 600, 400));
+        primaryStage.setScene(new Scene(mainView, 1100, 500));
         primaryStage.show();
     }
 
