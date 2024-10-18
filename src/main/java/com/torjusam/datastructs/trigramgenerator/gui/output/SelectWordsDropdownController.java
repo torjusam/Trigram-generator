@@ -1,4 +1,4 @@
-package com.torjusam.datastructs.trigramgenerator.gui;
+package com.torjusam.datastructs.trigramgenerator.gui.output;
 
 import com.torjusam.datastructs.trigramgenerator.services.TrigramController;
 import javafx.scene.control.ComboBox;
@@ -10,22 +10,22 @@ class SelectWordsDropdownController {
 
     private final TrigramController trigramController;
 
-    public SelectWordsDropdownController(TrigramController trigramController) {
+    SelectWordsDropdownController(TrigramController trigramController) {
         this.trigramController = trigramController;
     }
 
     // Add trigram listener
-    public void addTrigramListener(Runnable listener) {
+    void addTrigramListener(Runnable listener) {
         trigramController.addTrigramListener(listener);
     }
 
     // Check if trigram data is available
-    public boolean isTrigramDataAvailable() {
+    boolean isTrigramDataAvailable() {
         return !trigramController.getTrigramStorage().getTrigramMap().isEmpty();
     }
 
     // Populate capital words dropdown with words that start with a capital letter
-    public void populateCapitalWordsDropdown(ComboBox<String> comboBox) {
+    void populateCapitalWordsDropdown(ComboBox<String> comboBox) {
         Map<String, Integer> capitalWords = getCapitalWordsWithFrequency();
         comboBox.getItems().clear();
         capitalWords.forEach((word, frequency) -> {
@@ -34,7 +34,7 @@ class SelectWordsDropdownController {
     }
 
     // Populate the next words dropdown based on the selected capital word
-    public void populateNextWordsDropdown(ComboBox<String> comboBox, String selectedCapitalWord) {
+    void populateNextWordsDropdown(ComboBox<String> comboBox, String selectedCapitalWord) {
         comboBox.getItems().clear();
         String wordOnly = selectedCapitalWord.split(" ")[0]; // Remove frequency from the string
         List<String> nextWords = getNextWordsFor(wordOnly);
@@ -42,7 +42,7 @@ class SelectWordsDropdownController {
     }
 
     // Get capital words with frequency from trigram storage
-    public Map<String, Integer> getCapitalWordsWithFrequency() {
+    Map<String, Integer> getCapitalWordsWithFrequency() {
         Map<String, Integer> frequencyMap = new HashMap<>();
 
         // Iterate through the trigram map
@@ -62,7 +62,7 @@ class SelectWordsDropdownController {
     }
 
     // Method to get next words based on a selected capital word
-    public List<String> getNextWordsFor(String capitalWord) {
+    List<String> getNextWordsFor(String capitalWord) {
         Set<String> possibleNextWords = new HashSet<>();
 
         // Iterate through the trigram map to find sequences that start with the given capital word

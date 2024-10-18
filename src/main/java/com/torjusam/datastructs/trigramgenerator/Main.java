@@ -1,6 +1,7 @@
 package com.torjusam.datastructs.trigramgenerator;
 
 import com.torjusam.datastructs.trigramgenerator.gui.MainView;
+import com.torjusam.datastructs.trigramgenerator.services.HandleUncaughtExceptions;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;

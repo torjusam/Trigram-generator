@@ -1,5 +1,8 @@
 package com.torjusam.datastructs.trigramgenerator.gui;
 
+import com.torjusam.datastructs.trigramgenerator.gui.input.LinkSection;
+import com.torjusam.datastructs.trigramgenerator.gui.input.TxtFileSection;
+import com.torjusam.datastructs.trigramgenerator.gui.output.SelectWordsDropdown;
 import com.torjusam.datastructs.trigramgenerator.services.TrigramController;
 import com.torjusam.datastructs.trigramgenerator.services.TrigramStorage;
 import javafx.geometry.Insets;

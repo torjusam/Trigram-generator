@@ -1,4 +1,4 @@
-package com.torjusam.datastructs.trigramgenerator;
+package com.torjusam.datastructs.trigramgenerator.services;
 
 import javafx.application.Platform;
 import javafx.scene.control.Alert;

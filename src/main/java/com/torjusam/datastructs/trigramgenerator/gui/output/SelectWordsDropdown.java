@@ -1,10 +1,9 @@
-package com.torjusam.datastructs.trigramgenerator.gui;
+package com.torjusam.datastructs.trigramgenerator.gui.output;
 
 import com.torjusam.datastructs.trigramgenerator.services.TrigramController;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 
 
 /**

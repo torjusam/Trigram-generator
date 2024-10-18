@@ -1,4 +1,4 @@
-package com.torjusam.datastructs.trigramgenerator.gui;
+package com.torjusam.datastructs.trigramgenerator.gui.input;
 
 import com.torjusam.datastructs.trigramgenerator.services.TrigramController;
 

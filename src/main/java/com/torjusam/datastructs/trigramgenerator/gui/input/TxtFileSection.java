@@ -1,6 +1,6 @@
-package com.torjusam.datastructs.trigramgenerator.gui;
+package com.torjusam.datastructs.trigramgenerator.gui.input;
 
-import com.torjusam.datastructs.trigramgenerator.HandleUncaughtExceptions;
+import com.torjusam.datastructs.trigramgenerator.services.HandleUncaughtExceptions;
 import com.torjusam.datastructs.trigramgenerator.services.TrigramController;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -19,11 +19,11 @@ import java.util.List;
  * This class allows users to add and remove files and displays the selected files in the UI.
  * Delegates logic to {@link TxtFileSectionController}.
  */
-class TxtFileSection extends VBox {
+public class TxtFileSection extends VBox {
     private final VBox fileListContainer;
     private final TxtFileSectionController fileController;
 
-    TxtFileSection(TrigramController triController) {
+    public TxtFileSection(TrigramController triController) {
         List<File> selectedFiles = new ArrayList<>();
         this.fileListContainer = new VBox(10);
         this.fileController = new TxtFileSectionController(triController, selectedFiles);
