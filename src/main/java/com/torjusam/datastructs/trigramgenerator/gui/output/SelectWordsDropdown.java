@@ -9,7 +9,7 @@ import javafx.scene.layout.GridPane;
 /**
  * Responsible for initializing, enabling/disabling and populating the ComboBox.
  */
-public class SelectWordsDropdown extends GridPane {
+class SelectWordsDropdown extends GridPane {
 
     private final ComboBox<String> capitalWordsComboBox;
     private final ComboBox<String> nextWordsComboBox;
@@ -19,7 +19,7 @@ public class SelectWordsDropdown extends GridPane {
     public SelectWordsDropdown(TrigramController trigramController) {
         this.controller = new SelectWordsDropdownController(trigramController);
 
-        // Initialize ComboBoxes as initally disabled
+        // Initialize ComboBoxes as initially disabled
         this.capitalWordsComboBox = new ComboBox<>();
         this.capitalWordsComboBox.setDisable(true);
         this.nextWordsComboBox = new ComboBox<>();
@@ -31,13 +31,14 @@ public class SelectWordsDropdown extends GridPane {
 
         initializeGrid();
 
-        controller.addTrigramListener(this::enableCapitalWordsDropdown); // Check if trigram data is redy
+        controller.addTrigramListener(this::enableCapitalWordsDropdown); // Check if trigram data is ready
 
         // Add listener for capital words selection
         capitalWordsComboBox.setOnAction(e -> {
             String selectedCapitalWord = capitalWordsComboBox.getValue();
-            if (selectedCapitalWord != null)
+            if (selectedCapitalWord != null) {
                 enableNextWordsDropdown(selectedCapitalWord);
+            }
         });
     }
 
@@ -53,7 +54,6 @@ public class SelectWordsDropdown extends GridPane {
         add(capitalWordsComboBox, 0, 2);
         add(nextWordLabel, 1, 1);
         add(nextWordsComboBox, 1, 2);
-
     }
 
     /**
@@ -73,5 +73,26 @@ public class SelectWordsDropdown extends GridPane {
     private void enableNextWordsDropdown(String selectedCapitalWord) {
         nextWordsComboBox.setDisable(false);
         controller.populateNextWordsDropdown(nextWordsComboBox, selectedCapitalWord);
+    }
+
+    /**
+     * Get selected first word
+     */
+    String getSelectedFirstWord() {
+        return capitalWordsComboBox.getValue();
+    }
+
+    /**
+     * Get selected second word
+     */
+    String getSelectedSecondWord() {
+        return nextWordsComboBox.getValue();
+    }
+
+    /**
+     * Set a callback when both words are selected
+     */
+    void setOnBothWordsSelected(Runnable callback) {
+        nextWordsComboBox.setOnAction(e -> callback.run());
     }
 }
