@@ -16,7 +16,7 @@ class SelectWordsDropdown extends GridPane {
     private final Label infoLabel;
     private final SelectWordsDropdownController controller;
 
-    public SelectWordsDropdown(TrigramController trigramController) {
+    SelectWordsDropdown(TrigramController trigramController) {
         this.controller = new SelectWordsDropdownController(trigramController);
 
         // Initialize ComboBoxes as initially disabled
@@ -75,23 +75,14 @@ class SelectWordsDropdown extends GridPane {
         controller.populateNextWordsDropdown(nextWordsComboBox, selectedCapitalWord);
     }
 
-    /**
-     * Get selected first word
-     */
     String getSelectedFirstWord() {
         return capitalWordsComboBox.getValue();
     }
 
-    /**
-     * Get selected second word
-     */
     String getSelectedSecondWord() {
         return nextWordsComboBox.getValue();
     }
 
-    /**
-     * Set a callback when both words are selected
-     */
     void setOnBothWordsSelected(Runnable callback) {
         nextWordsComboBox.setOnAction(e -> callback.run());
     }
