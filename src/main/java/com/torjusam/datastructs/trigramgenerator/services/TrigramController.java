@@ -2,7 +2,6 @@ package com.torjusam.datastructs.trigramgenerator.services;
 
 import java.io.IOException;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * Initalizes trigramstorage and
@@ -46,41 +45,6 @@ public class TrigramController {
         for (Runnable listener : trigramListeners) {
             listener.run();
         }
-    }
-
-    // /
-    public Map<String, Integer> getCapitalWordsWithFrequency() {
-        Map<String, Integer> frequencyMap = new HashMap<>();
-
-        // Iterate through the trigram map
-        trigramStorage.getTrigramMap().forEach((key, value) -> {
-            String firstWord = key.get(0);
-
-            // Check if the first word starts with a capital letter
-            if (Character.isUpperCase(firstWord.charAt(0))) {
-                frequencyMap.put(firstWord, frequencyMap.getOrDefault(firstWord, 0) + 1);
-            }
-        });
-
-        // Sort by frequency (descending order) and return
-        return frequencyMap.entrySet().stream()
-                .sorted((entry1, entry2) -> entry2.getValue() - entry1.getValue())
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
-    }
-
-    // Method to get next words based on a selected capital word
-    public List<String> getNextWordsFor(String capitalWord) {
-        Set<String> possibleNextWords = new HashSet<>();
-
-        // Iterate through the trigram map to find sequences that start with the given capital word
-        trigramStorage.getTrigramMap().forEach((key, value) -> {
-            if (key.get(0).equals(capitalWord)) {
-                possibleNextWords.add(key.get(1)); // Add the next word to the set
-            }
-        });
-
-        // Return the set as a sorted list
-        return new ArrayList<>(possibleNextWords);
     }
 
     public TrigramStorage getTrigramStorage() {

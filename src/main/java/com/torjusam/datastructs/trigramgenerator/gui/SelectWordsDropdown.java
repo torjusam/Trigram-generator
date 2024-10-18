@@ -1,15 +1,11 @@
 package com.torjusam.datastructs.trigramgenerator.gui;
 
 import com.torjusam.datastructs.trigramgenerator.services.TrigramController;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Responsible for initializing, enabling/disabling and populating the ComboBox.
@@ -19,73 +15,64 @@ public class SelectWordsDropdown extends GridPane {
     private final ComboBox<String> capitalWordsComboBox;
     private final ComboBox<String> nextWordsComboBox;
     private final Label infoLabel;
-    private final TrigramController trigramController;
+    private final SelectWordsDropdownController controller;
 
-    public SelectWordsDropdown(TrigramController triController) {
-        this.trigramController = triController;
+    public SelectWordsDropdown(TrigramController trigramController) {
+        this.controller = new SelectWordsDropdownController(trigramController);
 
-        // Initialize the ComboBoxes and label
+        // Initialize ComboBoxes as initally disabled
         this.capitalWordsComboBox = new ComboBox<>();
-        this.capitalWordsComboBox.setDisable(true); // Initially disabled
-
+        this.capitalWordsComboBox.setDisable(true);
         this.nextWordsComboBox = new ComboBox<>();
-        this.nextWordsComboBox.setDisable(true); // Initially disabled
+        this.nextWordsComboBox.setDisable(true);
 
+        // Info label
         this.infoLabel = new Label("Add input data to populate words");
-        this.infoLabel.setVisible(true); // Visible while no data is present
+        this.infoLabel.setVisible(true);
 
-        // Add elements to the VBox
-        this.getChildren().addAll(infoLabel, capitalWordsComboBox, nextWordsComboBox);
+        initializeGrid();
 
-        // Check if trigram data is ready
-        trigramController.addTrigramListener(() -> {
-            enableCapitalWordsDropdown();
-        });
+        controller.addTrigramListener(this::enableCapitalWordsDropdown); // Check if trigram data is redy
 
         // Add listener for capital words selection
         capitalWordsComboBox.setOnAction(e -> {
             String selectedCapitalWord = capitalWordsComboBox.getValue();
-            if (selectedCapitalWord != null) {
+            if (selectedCapitalWord != null)
                 enableNextWordsDropdown(selectedCapitalWord);
-            }
         });
     }
 
+    private void initializeGrid() {
+        setHgap(20);
+        setVgap(10);
+
+        Label capitalWordLabel = new Label("First word, sorted by occurrence:");
+        Label nextWordLabel = new Label("Second word:");
+
+        add(infoLabel, 0, 0);
+        add(capitalWordLabel, 0, 1);
+        add(capitalWordsComboBox, 0, 2);
+        add(nextWordLabel, 1, 1);
+        add(nextWordsComboBox, 1, 2);
+
+    }
+
     /**
-     * Enable the capital words dropdown once trigram data is available
+     * Enable dropdown for first word
      */
     private void enableCapitalWordsDropdown() {
-        if (!trigramController.getTrigramStorage().getTrigramMap().isEmpty()) {
-            capitalWordsComboBox.setDisable(false); // Enable the capital words ComboBox
-            infoLabel.setVisible(false); // Hide label once dropdown is enabled
-            populateCapitalWordsDropdown();
+        if (controller.isTrigramDataAvailable()) {
+            capitalWordsComboBox.setDisable(false);
+            infoLabel.setVisible(false);
+            controller.populateCapitalWordsDropdown(capitalWordsComboBox);
         }
-    }
-
-    /**
-     * Populate the capital words dropdown with words that start with a capital letter
-     */
-    private void populateCapitalWordsDropdown() {
-        Map<String, Integer> capitalWords = trigramController.getCapitalWordsWithFrequency();
-
-        // Populate ComboBox with words and frequencies
-        capitalWords.forEach((word, frequency) -> {
-            capitalWordsComboBox.getItems().add(word + " (" + frequency + ")");
-        });
     }
 
     /**
      * Enable the next words dropdown based on the selected capital word
      */
     private void enableNextWordsDropdown(String selectedCapitalWord) {
-        nextWordsComboBox.getItems().clear(); // Clear previous items
-        nextWordsComboBox.setDisable(false); // Enable the next words ComboBox
-
-        // Extract the word without the frequency information (e.g., "Word (3)" -> "Word")
-        String wordOnly = selectedCapitalWord.split(" ")[0];
-
-        // Populate the next words ComboBox
-        List<String> possibleNextWords = trigramController.getNextWordsFor(wordOnly);
-        nextWordsComboBox.getItems().addAll(possibleNextWords);
+        nextWordsComboBox.setDisable(false);
+        controller.populateNextWordsDropdown(nextWordsComboBox, selectedCapitalWord);
     }
 }
