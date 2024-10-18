@@ -3,6 +3,7 @@ package com.torjusam.datastructs.trigramgenerator.gui;
 import com.torjusam.datastructs.trigramgenerator.services.TrigramController;
 import com.torjusam.datastructs.trigramgenerator.services.TrigramStorage;
 import javafx.geometry.Insets;
+import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -16,7 +17,7 @@ import javafx.scene.layout.VBox;
 public class MainView extends BorderPane {
 
     private final TrigramStorage triStore;
-    private final TrigramController triController;
+    final TrigramController triController;
 
     /**
      * Constructor initalizes TrigramStorage and its controller,
@@ -43,10 +44,14 @@ public class MainView extends BorderPane {
 
         // container
         VBox inputSec = new VBox(10);
-        inputSec.setPadding(new Insets(10));
-        inputSec.setStyle("-fx-border-color: gray; -fx-border-width: 1px;"); // CSS border
+        inputSec.setPadding(new Insets(0, 10, 0, 10));
+        inputSec.setStyle("-fx-border-color: transparent gray transparent transparent; -fx-border-width: 0 1px 0 0;"); // border only on the right
+
+        Label inputHeader = new Label("Input");
+        inputHeader.setStyle("-fx-font-size: 33px; -fx-font-weight: bold;");
 
         inputSec.getChildren().addAll(
+                inputHeader,
                 txtFileSection,
                 new Separator(),
                 linkSection
@@ -60,9 +65,18 @@ public class MainView extends BorderPane {
      * TODO: Implement
      */
     private VBox createOutputSection() {
-        VBox middleSec = new VBox();
-        middleSec.setPadding(new Insets(10));
+        SelectWordsDropdown selectWords = new SelectWordsDropdown(triController);
 
-        return middleSec;
+        VBox outputSec = new VBox();
+        outputSec.setPadding(new Insets(0, 10, 0, 10));
+
+        Label outputHeader = new Label("Output");
+        outputHeader.setStyle("-fx-font-size: 33px; -fx-font-weight: bold;");
+
+        outputSec.getChildren().addAll(
+                outputHeader,
+                selectWords
+        );
+        return outputSec;
     }
 }

@@ -43,5 +43,4 @@ public class TrigramStorage {
     public Map<List<String>, Map<String, Integer>> getTrigramMap() {
         return trigramMap;
     }
-
 }
