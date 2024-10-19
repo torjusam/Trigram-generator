@@ -29,7 +29,7 @@ class TxtFileSectionController {
         trigramController.processFile(file.getAbsolutePath());
     }
 
-    public void removeFile(File file) {
+    void removeFile(File file) {
         selectedFiles.remove(file);
     }
 }

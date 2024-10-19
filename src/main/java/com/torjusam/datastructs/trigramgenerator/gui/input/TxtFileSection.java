@@ -19,7 +19,7 @@ import java.util.List;
  * This class allows users to add and remove files and displays the selected files in the UI.
  * Delegates logic to {@link TxtFileSectionController}.
  */
-public class TxtFileSection extends VBox {
+class TxtFileSection extends VBox {
     private final VBox fileListContainer;
     private final TxtFileSectionController fileController;
 

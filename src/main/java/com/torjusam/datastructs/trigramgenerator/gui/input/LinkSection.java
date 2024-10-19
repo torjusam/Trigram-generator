@@ -16,7 +16,7 @@ import static com.torjusam.datastructs.trigramgenerator.gui.input.LinkSectionCon
 /**
  * The section for inputting links
  */
-public class LinkSection extends VBox {
+class LinkSection extends VBox {
 
     private final VBox linkListContainer;
     private final LinkSectionController linkController;
