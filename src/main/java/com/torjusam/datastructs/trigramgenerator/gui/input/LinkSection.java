@@ -32,7 +32,7 @@ class LinkSection extends VBox {
         Label header = new Label("Links");
         header.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
 
-        Button addLinkButton = new Button("Legg til ny lenke");
+        Button addLinkButton = new Button("Add new link");
         addLinkButton.setOnAction(e -> handleAddLink(""));
 
         this.setSpacing(10);
@@ -57,8 +57,8 @@ class LinkSection extends VBox {
         linkInputField.setPromptText("Enter a URL");
         linkInputField.setPrefWidth(300);
 
-        Button confirmBtn = new Button("Legg til");
-        Button cancelBtn = new Button("Avbryt");
+        Button confirmBtn = new Button("Add");
+        Button cancelBtn = new Button("Cancel");
 
         // On "add link": display row with input field, and a confirm/cancel btn
         HBox linkInputRow = new HBox(10);
